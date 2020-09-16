@@ -8,24 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		4EB1A74225074EA100AA25FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74125074EA100AA25FB /* AppDelegate.m */; };
-		4EB1A74525074EA100AA25FB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74425074EA100AA25FB /* ViewController.m */; };
+		4EB1A74525074EA100AA25FB /* WorldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74425074EA100AA25FB /* WorldViewController.m */; };
 		4EB1A74825074EA100AA25FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74625074EA100AA25FB /* Main.storyboard */; };
 		4EB1A74A25074EA100AA25FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74925074EA100AA25FB /* Assets.xcassets */; };
 		4EB1A74D25074EA100AA25FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74B25074EA100AA25FB /* LaunchScreen.storyboard */; };
 		4EB1A75025074EA100AA25FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74F25074EA100AA25FB /* main.m */; };
+		4EE69EAB250A0561006D8ABC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE69EAA250A0561006D8ABC /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23EF458BE1D55B073E31F220 /* Pods-CovidReport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidReport.debug.xcconfig"; path = "Target Support Files/Pods-CovidReport/Pods-CovidReport.debug.xcconfig"; sourceTree = "<group>"; };
 		4EB1A73D25074EA100AA25FB /* CovidReport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidReport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB1A74025074EA100AA25FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4EB1A74125074EA100AA25FB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4EB1A74325074EA100AA25FB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4EB1A74425074EA100AA25FB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4EB1A74325074EA100AA25FB /* WorldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldViewController.h; sourceTree = "<group>"; };
+		4EB1A74425074EA100AA25FB /* WorldViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldViewController.m; sourceTree = "<group>"; };
 		4EB1A74725074EA100AA25FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EB1A74925074EA100AA25FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EB1A74C25074EA100AA25FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EB1A74E25074EA100AA25FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EB1A74F25074EA100AA25FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4EE69EAA250A0561006D8ABC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		76ECFDCE0810FB3FFFCD8262 /* Pods_CovidReport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CovidReport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EEE0C0E88E71598F1AA8945 /* Pods-CovidReport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidReport.release.xcconfig"; path = "Target Support Files/Pods-CovidReport/Pods-CovidReport.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EE69EAB250A0561006D8ABC /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,8 @@
 			children = (
 				4EB1A73F25074EA100AA25FB /* CovidReport */,
 				4EB1A73E25074EA100AA25FB /* Products */,
+				C026C2C355B688D39D9EAF8B /* Pods */,
+				CD3FF766BF3F89DE761B54E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +68,8 @@
 			children = (
 				4EB1A74025074EA100AA25FB /* AppDelegate.h */,
 				4EB1A74125074EA100AA25FB /* AppDelegate.m */,
-				4EB1A74325074EA100AA25FB /* ViewController.h */,
-				4EB1A74425074EA100AA25FB /* ViewController.m */,
+				4EB1A74325074EA100AA25FB /* WorldViewController.h */,
+				4EB1A74425074EA100AA25FB /* WorldViewController.m */,
 				4EB1A74625074EA100AA25FB /* Main.storyboard */,
 				4EB1A74B25074EA100AA25FB /* LaunchScreen.storyboard */,
 				4EB1A74925074EA100AA25FB /* Assets.xcassets */,
@@ -71,6 +79,24 @@
 			path = CovidReport;
 			sourceTree = "<group>";
 		};
+		C026C2C355B688D39D9EAF8B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23EF458BE1D55B073E31F220 /* Pods-CovidReport.debug.xcconfig */,
+				7EEE0C0E88E71598F1AA8945 /* Pods-CovidReport.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CD3FF766BF3F89DE761B54E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4EE69EAA250A0561006D8ABC /* QuartzCore.framework */,
+				76ECFDCE0810FB3FFFCD8262 /* Pods_CovidReport.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,6 +104,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EB1A75325074EA100AA25FB /* Build configuration list for PBXNativeTarget "CovidReport" */;
 			buildPhases = (
+				A02472682A1D648AB21616E1 /* [CP] Check Pods Manifest.lock */,
 				4EB1A73925074EA100AA25FB /* Sources */,
 				4EB1A73A25074EA100AA25FB /* Frameworks */,
 				4EB1A73B25074EA100AA25FB /* Resources */,
@@ -136,12 +163,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A02472682A1D648AB21616E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CovidReport-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4EB1A73925074EA100AA25FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EB1A74525074EA100AA25FB /* ViewController.m in Sources */,
+				4EB1A74525074EA100AA25FB /* WorldViewController.m in Sources */,
 				4EB1A75025074EA100AA25FB /* main.m in Sources */,
 				4EB1A74225074EA100AA25FB /* AppDelegate.m in Sources */,
 			);
@@ -283,6 +335,7 @@
 		};
 		4EB1A75425074EA100AA25FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23EF458BE1D55B073E31F220 /* Pods-CovidReport.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +353,7 @@
 		};
 		4EB1A75525074EA100AA25FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EEE0C0E88E71598F1AA8945 /* Pods-CovidReport.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
