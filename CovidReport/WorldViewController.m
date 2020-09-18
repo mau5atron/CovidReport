@@ -34,7 +34,12 @@
 	
 	/* Core Animation stuff */
 	
-	
+	/*
+	 when the app first loads, token.plist may not be in the documents folder on ios device
+	 therefore, we should copy the token.plist from the main bundle first before we try to write to it
+	 should be a check but dont have it run each time as it will overwrite the token.plist in the documents
+	 folder with a clean version from bundle if its already present in documents rather than copy to
+	*/
 }
 
 //- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
@@ -67,26 +72,68 @@
 	
 	// actual task queue to make request
 	NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-																completionHandler:^(
-																	NSData * _Nullable data,
-																	NSURLResponse * _Nullable response,
-																	NSError * _Nullable error
-																){
-																	NSLog(@"------Completed request------");
-																	
-																	// if this was a non json response we would use
-																	// NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *) response;
-																	
-																	// for json do this
-																	NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-																	NSLog(@"Response is: %@", jsonResponse);
-																	// get status or token
-																	// NSLog(@"Response is: %@", jsonResponse[@"accepted_tos_status"]);
-																	
-																	// get error if any
-																	// NSLog(@"Response is: %@", jsonResponse[@"error"]);
-																}];
+																					completionHandler:^(
+																															NSData * _Nullable data,
+																															NSURLResponse * _Nullable response,
+																															NSError * _Nullable error
+																															){
+																						NSLog(@"------Completed request------");
+																						
+																							// if this was a non json response we would use
+																							// NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *) response;
+																						
+																							// for json do this
+																						@try { // try to save the data from response
+																							
+																							NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+																							NSLog(@"Response is: %@", jsonResponse);
+																							
+																								// set api key to plist file
+																							NSError *plistError;
+																							NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, TRUE);
+																							NSString *documentsPath = [paths objectAtIndex:0]; // first document
+																							NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"token.plist"];
+																							NSLog(@"Plist dir is: %@", plistPath);
+																							
+																							NSFileManager *fileManager = [NSFileManager defaultManager];
+																							if ( ![fileManager fileExistsAtPath:plistPath] ){
+																								NSString *mBundle = [[NSBundle mainBundle] pathForResource:@"token" ofType:@"plist"];
+																								[fileManager copyItemAtPath:mBundle toPath:plistPath error:&plistError];
+																							}
+																							
+																							NSMutableDictionary *dataToWrite = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+																							[dataToWrite setObject:jsonResponse[@"api_access_token"] forKey:@"api_token"];
+																							[dataToWrite writeToFile:plistPath atomically:TRUE];
+																							
+																						} @catch (NSException *exception) {
+																							NSLog(@"error performing request: %@", exception);
+																						} @finally {
+																							NSLog(@"Reached finally...");
+																						}
+																						
+																					}];
 	[task resume];
+}
+
+- (IBAction)readFromPlist:(id)sender {
+	NSLog(@"Token from plist: %@", [self readSavedToken]);
+}
+
+- (NSString *)readSavedToken {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, TRUE);
+	NSString *documentsPath = [paths objectAtIndex:0]; // first document
+	NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"token.plist"];
+	
+	NSMutableDictionary *plistContents = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+	return [plistContents objectForKey:@"api_token"];
+}
+
+- (NSMutableDictionary *)requestTos {
+	NSString *baseUri = @"http://localhost:8090";
+	NSString *endpoint = @"/accept_tos";
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseUri, endpoint]]];
+	
+	// no json body necessary as it is get request
 }
 
 @end

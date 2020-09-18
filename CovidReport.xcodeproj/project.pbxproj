@@ -13,6 +13,7 @@
 		4EB1A74A25074EA100AA25FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74925074EA100AA25FB /* Assets.xcassets */; };
 		4EB1A74D25074EA100AA25FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74B25074EA100AA25FB /* LaunchScreen.storyboard */; };
 		4EB1A75025074EA100AA25FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74F25074EA100AA25FB /* main.m */; };
+		4EE1C85225148BCC00374423 /* token.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EE1C85125148BCC00374423 /* token.plist */; };
 		4EE69EAB250A0561006D8ABC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE69EAA250A0561006D8ABC /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		4EB1A74C25074EA100AA25FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EB1A74E25074EA100AA25FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EB1A74F25074EA100AA25FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4EE1C85125148BCC00374423 /* token.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = token.plist; sourceTree = "<group>"; };
 		4EE69EAA250A0561006D8ABC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		76ECFDCE0810FB3FFFCD8262 /* Pods_CovidReport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CovidReport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EEE0C0E88E71598F1AA8945 /* Pods-CovidReport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidReport.release.xcconfig"; path = "Target Support Files/Pods-CovidReport/Pods-CovidReport.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				4EB1A74925074EA100AA25FB /* Assets.xcassets */,
 				4EB1A74E25074EA100AA25FB /* Info.plist */,
 				4EB1A74F25074EA100AA25FB /* main.m */,
+				4EE1C85125148BCC00374423 /* token.plist */,
 			);
 			path = CovidReport;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			files = (
 				4EB1A74D25074EA100AA25FB /* LaunchScreen.storyboard in Resources */,
 				4EB1A74A25074EA100AA25FB /* Assets.xcassets in Resources */,
+				4EE1C85225148BCC00374423 /* token.plist in Resources */,
 				4EB1A74825074EA100AA25FB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

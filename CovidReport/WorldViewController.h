@@ -13,9 +13,13 @@
 
 // Properties
 @property (weak, nonatomic) IBOutlet UIButton *getApiTokenBtnOutlet;
+@property (weak, nonatomic) IBOutlet UIView *acceptTermsPopupViewOutlet;
+
 
 // Actions
 - (IBAction)getApiToken:(id)sender;
-
+- (IBAction)readFromPlist:(id)sender;
+- (NSString *)readSavedToken;
+- (NSMutableDictionary *)requestTos;
 @end
 
