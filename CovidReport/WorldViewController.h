@@ -7,19 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <QuartzCore/QuartzCore.h> apply for graphics stuff
+#import <QuartzCore/QuartzCore.h> //apply for graphics stuff
 
-@interface WorldViewController : UIViewController
+@interface WorldViewController : UIViewController {
+	float deviceWidth;
+	float deviceHeight;
+}
 
 // Properties
 @property (weak, nonatomic) IBOutlet UIButton *getApiTokenBtnOutlet;
+@property (weak, nonatomic) IBOutlet UITextView *termsOfServiceTextViewOutlet;
 @property (weak, nonatomic) IBOutlet UIView *acceptTermsPopupViewOutlet;
-
 
 // Actions
 - (IBAction)getApiToken:(id)sender;
 - (IBAction)readFromPlist:(id)sender;
+- (IBAction)checkForValidToken:(id)sender;
+- (IBAction)teardownTermsPopup;
+- (IBAction)showTermsPopup;
+
+// functions
 - (NSString *)readSavedToken;
-- (NSMutableDictionary *)requestTos;
+- (void)requestTos;
+- (void)checkForValidTokenFunc;
+- (void)buildTermsOfUsePopop;
+//- (void)settingExampleThing:(NSString *)someStringAdded addingSecondNamedParam:(NSString *)someOtherString;
 @end
 
