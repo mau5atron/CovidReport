@@ -197,6 +197,24 @@
 	NSString *documentsPath = [paths objectAtIndex:0]; // first doc
 	NSLog(@"Made it past documentsPath");
 	NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"token.plist"]; // path to plist
+	NSError *plistError;
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	// If the plist for the token does not exists, then copy the file from mainBundle to documents
+	if ( ![fileManager fileExistsAtPath:plistPath] ){
+		NSString *mBundle = [[NSBundle mainBundle] pathForResource:@"token" ofType:@"plist"];
+		[fileManager copyItemAtPath:mBundle toPath:plistPath error:&plistError];
+	}
+
+	/*
+	 Upon new startup, the first action we perform is check if the token is valid
+	 However, the token.plist might not already be copied into the documents folder
+	 of the device, so first thing we need to do is make a check (like we do in that
+	 other request and make a copy into device documents before trying to check if
+	 token is valid, otherwise there will be an error
+	 
+	 plist contents is nil, need to copy over the plist from the main bundle
+	*/
 	
 	// dictionary with plist contents
 	NSMutableDictionary *plistContents = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
@@ -246,6 +264,8 @@
 				
 			} @catch (NSException *exception) {
 				NSLog(@"Error performing token validation request: %@", exception);
+				// if fails, display popup
+				[self buildTermsOfUsePopop];
 			}
 		}
 	];
