@@ -51,43 +51,47 @@
 	NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:NULL delegateQueue:[NSOperationQueue mainQueue]];
 	
 	// actual task queue to make request
-	NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-																					completionHandler:^(
-																						NSData * _Nullable data,
-																						NSURLResponse * _Nullable response,
-																						NSError * _Nullable error
-																					){
-																							// if this was a non json response we would use
-																							// NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *) response;
-																						
-																							// for json do this
-																						@try { // try to save the data from response
-																							
-																							NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-																							NSLog(@"Response is: %@", jsonResponse);
-																							
-																								// set api key to plist file
-																							NSError *plistError;
-																							NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, TRUE);
-																							NSString *documentsPath = [paths objectAtIndex:0]; // first document
-																							NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"token.plist"];
-																							NSLog(@"Plist dir is: %@", plistPath);
-																							
-																							NSFileManager *fileManager = [NSFileManager defaultManager];
-																							// If the plist for the token does not exists, then copy the file from mainBundle to documents
-																							if ( ![fileManager fileExistsAtPath:plistPath] ){
-																								NSString *mBundle = [[NSBundle mainBundle] pathForResource:@"token" ofType:@"plist"];
-																								[fileManager copyItemAtPath:mBundle toPath:plistPath error:&plistError];
-																							}
-																							
-																							NSMutableDictionary *dataToWrite = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-																							[dataToWrite setObject:jsonResponse[@"api_access_token"] forKey:@"api_token"];
-																							[dataToWrite writeToFile:plistPath atomically:TRUE];
-																							NSLog(@"------Completed request------");
-																						} @catch (NSException *exception) {
-																							NSLog(@"error performing request: %@", exception);
-																						}
-																					}];
+	NSURLSessionDataTask *task = [
+			  session dataTaskWithRequest:request
+			  completionHandler:^(
+			  NSData * _Nullable data,
+			  NSURLResponse * _Nullable response,
+			  NSError * _Nullable error
+			){
+					// if this was a non json response we would use
+					// NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *) response;
+				
+					// for json do this
+				@try { // try to save the data from response
+					
+					NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+					NSLog(@"Response is: %@", jsonResponse);
+					
+						// set api key to plist file
+					NSError *plistError;
+					NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, TRUE);
+					NSString *documentsPath = [paths objectAtIndex:0]; // first document
+					NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"token.plist"];
+					NSLog(@"Plist dir is: %@", plistPath);
+					
+					NSFileManager *fileManager = [NSFileManager defaultManager];
+					// If the plist for the token does not exists, then copy the file from mainBundle to documents
+					if ( ![fileManager fileExistsAtPath:plistPath] ){
+						NSString *mBundle = [[NSBundle mainBundle] pathForResource:@"token" ofType:@"plist"];
+						[fileManager copyItemAtPath:mBundle toPath:plistPath error:&plistError];
+					}
+					
+					NSMutableDictionary *dataToWrite = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+					[dataToWrite setObject:jsonResponse[@"api_access_token"] forKey:@"api_token"];
+					[dataToWrite writeToFile:plistPath atomically:TRUE];
+					NSLog(@"------Completed request------");
+					NSLog(@"Token saved... breaking down popup");
+					[self teardownTermsPopup];
+				} @catch (NSException *exception) {
+					NSLog(@"error performing request: %@", exception);
+				}
+			}
+	];
 	[task resume];
 }
 
