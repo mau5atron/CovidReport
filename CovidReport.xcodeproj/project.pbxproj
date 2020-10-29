@@ -13,8 +13,12 @@
 		4EB1A74A25074EA100AA25FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74925074EA100AA25FB /* Assets.xcassets */; };
 		4EB1A74D25074EA100AA25FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74B25074EA100AA25FB /* LaunchScreen.storyboard */; };
 		4EB1A75025074EA100AA25FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74F25074EA100AA25FB /* main.m */; };
+		4EB30613253FFFBB008D00D0 /* USStateDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB30612253FFFBB008D00D0 /* USStateDataTableViewController.m */; };
+		4EB30616253FFFDF008D00D0 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB30615253FFFDF008D00D0 /* TableViewCell.m */; };
+		4EB3061925436DD3008D00D0 /* StateDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB3061825436DD3008D00D0 /* StateDataViewController.m */; };
 		4EE1C85225148BCC00374423 /* token.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EE1C85125148BCC00374423 /* token.plist */; };
 		4EE69EAB250A0561006D8ABC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE69EAA250A0561006D8ABC /* QuartzCore.framework */; };
+		4EEECF7D25460650004E2FBB /* DrawPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEECF7C25460650004E2FBB /* DrawPieChart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +33,16 @@
 		4EB1A74C25074EA100AA25FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EB1A74E25074EA100AA25FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EB1A74F25074EA100AA25FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4EB30611253FFFBB008D00D0 /* USStateDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USStateDataTableViewController.h; sourceTree = "<group>"; };
+		4EB30612253FFFBB008D00D0 /* USStateDataTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USStateDataTableViewController.m; sourceTree = "<group>"; };
+		4EB30614253FFFDF008D00D0 /* TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		4EB30615253FFFDF008D00D0 /* TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		4EB3061725436DD3008D00D0 /* StateDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StateDataViewController.h; sourceTree = "<group>"; };
+		4EB3061825436DD3008D00D0 /* StateDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StateDataViewController.m; sourceTree = "<group>"; };
 		4EE1C85125148BCC00374423 /* token.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = token.plist; sourceTree = "<group>"; };
 		4EE69EAA250A0561006D8ABC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		76ECFDCE0810FB3FFFCD8262 /* Pods_CovidReport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CovidReport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EEECF7B25460650004E2FBB /* DrawPieChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawPieChart.h; sourceTree = "<group>"; };
+		4EEECF7C25460650004E2FBB /* DrawPieChart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawPieChart.m; sourceTree = "<group>"; };
 		7EEE0C0E88E71598F1AA8945 /* Pods-CovidReport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidReport.release.xcconfig"; path = "Target Support Files/Pods-CovidReport/Pods-CovidReport.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,10 +79,17 @@
 		4EB1A73F25074EA100AA25FB /* CovidReport */ = {
 			isa = PBXGroup;
 			children = (
+				4EEECF7A25460639004E2FBB /* Graphics */,
 				4EB1A74025074EA100AA25FB /* AppDelegate.h */,
 				4EB1A74125074EA100AA25FB /* AppDelegate.m */,
 				4EB1A74325074EA100AA25FB /* WorldViewController.h */,
 				4EB1A74425074EA100AA25FB /* WorldViewController.m */,
+				4EB30611253FFFBB008D00D0 /* USStateDataTableViewController.h */,
+				4EB30612253FFFBB008D00D0 /* USStateDataTableViewController.m */,
+				4EB30614253FFFDF008D00D0 /* TableViewCell.h */,
+				4EB30615253FFFDF008D00D0 /* TableViewCell.m */,
+				4EB3061725436DD3008D00D0 /* StateDataViewController.h */,
+				4EB3061825436DD3008D00D0 /* StateDataViewController.m */,
 				4EB1A74625074EA100AA25FB /* Main.storyboard */,
 				4EB1A74B25074EA100AA25FB /* LaunchScreen.storyboard */,
 				4EB1A74925074EA100AA25FB /* Assets.xcassets */,
@@ -80,6 +98,15 @@
 				4EE1C85125148BCC00374423 /* token.plist */,
 			);
 			path = CovidReport;
+			sourceTree = "<group>";
+		};
+		4EEECF7A25460639004E2FBB /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				4EEECF7B25460650004E2FBB /* DrawPieChart.h */,
+				4EEECF7C25460650004E2FBB /* DrawPieChart.m */,
+			);
+			path = Graphics;
 			sourceTree = "<group>";
 		};
 		C026C2C355B688D39D9EAF8B /* Pods */ = {
@@ -95,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				4EE69EAA250A0561006D8ABC /* QuartzCore.framework */,
-				76ECFDCE0810FB3FFFCD8262 /* Pods_CovidReport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,6 +225,10 @@
 			files = (
 				4EB1A74525074EA100AA25FB /* WorldViewController.m in Sources */,
 				4EB1A75025074EA100AA25FB /* main.m in Sources */,
+				4EB3061925436DD3008D00D0 /* StateDataViewController.m in Sources */,
+				4EB30613253FFFBB008D00D0 /* USStateDataTableViewController.m in Sources */,
+				4EEECF7D25460650004E2FBB /* DrawPieChart.m in Sources */,
+				4EB30616253FFFDF008D00D0 /* TableViewCell.m in Sources */,
 				4EB1A74225074EA100AA25FB /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

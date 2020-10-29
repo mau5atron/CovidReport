@@ -7,12 +7,15 @@
 //
 
 #import "WorldViewController.h"
+#import "USStateDataTableViewController.h"
 
 @interface WorldViewController ()
 
+@property (retain, readwrite) USStateDataTableViewController *stateDataTableViewControllerPtr;
 @end
 
 @implementation WorldViewController
+@synthesize stateDataDict;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -24,6 +27,17 @@
 	unsigned int leftInset = self.view.safeAreaInsets.left;
 	self.acceptTermsPopupViewOutlet.frame = CGRectMake(leftInset, deviceHeight, deviceWidth, deviceHeight - 300);
 	[self checkForValidTokenFunc]; // inside this function we need to work out the bit response from the server
+	
+	// self.tableViewContainerOutlet.layer.hidden = TRUE;
+	self.tableViewContainerOutlet.layer.zPosition = -1.0f;
+	
+	// this stateDataDict will get set by the request through the api
+	self.stateDataDict = @{
+												 @"CA": @{@"positive": @2, @"recovered": @3, @"deaths": @4, @"date": @"9/27/2020", @"state_abbrev": @"CA", @"state_name": @"California"},
+												 @"FL": @{@"positive": @400, @"recovered": @30, @"deaths": @340, @"date": @"9/27/2020", @"state_abbrev": @"FL", @"state_name": @"Florida"}
+											 };
+	// time to make api request
+	self.stateDataTableViewControllerPtr.stateDataDict = self.stateDataDict;
 }
 
 // Actions *****************************************
@@ -31,7 +45,8 @@
 - (IBAction)getApiToken:(id)sender {
 	
 	// prepare endpoint request
-	NSString *baseUri = @"http://localhost:8090";
+	//NSString *baseUri = @"http://localhost:8090";
+	NSString *baseUri = @"http://192.168.0.74:8090";
 	NSString *endPoint = @"/agree_to_terms";
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseUri, endPoint]]];
 	// NSDictionary *jsonBody = @{ @"accepted_tos": @"trueaaa" };
@@ -95,14 +110,6 @@
 	[task resume];
 }
 
-- (IBAction)readFromPlist:(id)sender {
-	NSLog(@"Token from plist: %@", [self readSavedToken]);
-}
-
-- (IBAction)checkForValidToken:(id)sender {
-	[self checkForValidTokenFunc];
-}
-
 - (IBAction)teardownTermsPopup {
 	deviceWidth = CGRectGetWidth(self.view.bounds);
 	deviceHeight = CGRectGetHeight(self.view.bounds);
@@ -137,10 +144,6 @@
 	self.acceptTermsPopupViewOutlet.layer.cornerRadius = 10.0;
 }
 
-- (IBAction)showTermsPopup {
-	[self buildTermsOfUsePopop];
-}
-
 // Functions *************************************************
 
 - (NSString *)readSavedToken {
@@ -154,7 +157,8 @@
 
 - (void)requestTos {
 	// request setup
-	NSString *baseUri = @"http://localhost:8090";
+	// NSString *baseUri = @"http://localhost:8090";
+	NSString *baseUri = @"http://192.168.0.74:8090";
 	NSString *endpoint = @"/terms_of_service";
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseUri, endpoint]]];
 	
@@ -189,7 +193,9 @@
 
 - (void)checkForValidTokenFunc {
 	NSLog(@"Starting check for token.....");
-	NSString *baseUri = @"http://localhost:8090";
+	//NSString *baseUri = @"http://localhost:8090";
+	NSString *baseUri = @"http://192.168.0.74:8090";
+	
 	NSString *endPoint = @"/validate_token";
 	
 	// setup request
@@ -260,10 +266,15 @@
 				// handle bit response here
 				// could also do [responseBit isEqualToNumber:0];
 				if ( [responseBit intValue] == 0 ){
+					// add animation here to hide the uiview container
 					NSLog(@"Token is invalid!");
-					[self showTermsPopup];
+					 self.tableViewContainerOutlet.layer.hidden = TRUE;
+					// [self showTermsPopup];
+					[self buildTermsOfUsePopop];
 				} else if ( [responseBit intValue] == 1 ) {
 					NSLog(@"Token is valid");
+					self.tableViewContainerOutlet.layer.hidden = FALSE;
+					// add animation here to show the uiview container
 				}
 				
 			} @catch (NSException *exception) {
@@ -322,5 +333,25 @@
 //- (void)settingExampleThing:(NSString *)someStringAdded addingSecondNamedParam:(NSString *)someOtherString {
 //	
 //}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([[segue identifier] isEqualToString:@"showStateDataTableView"]){
+		NSLog(@"Segue for table view from US View");
+		/*
+		 creating USStateDataTableViewController instance
+		 assigning instance to ptr in WorldViewController property to retain it and assign it the
+		 instances stateDataArray in viewDidLoad
+		*/
+	
+		USStateDataTableViewController *stateDataTableViewController = [segue destinationViewController];
+		// reference view controller instance so we can use in viewDidLoad
+		self.stateDataTableViewControllerPtr = stateDataTableViewController;
+	}
+}
+
+- (void)getLatestUSCovidData {
+	// make request///
+	
+}
 
 @end
