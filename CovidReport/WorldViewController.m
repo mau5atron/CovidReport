@@ -102,6 +102,8 @@
 					NSLog(@"------Completed request------");
 					NSLog(@"Token saved... breaking down popup");
 					[self teardownTermsPopup];
+					// make table view show up again
+					self.tableViewContainerOutlet.hidden = FALSE;
 				} @catch (NSException *exception) {
 					NSLog(@"error performing request: %@", exception);
 				}
@@ -279,11 +281,14 @@
 					NSLog(@"Token is valid");
 					self.tableViewContainerOutlet.layer.hidden = FALSE;
 					// add animation here to show the uiview container
+					[self teardownTermsPopup];
 				}
 				
 			} @catch (NSException *exception) {
 				NSLog(@"Error performing token validation request: %@", exception);
 				// if fails, display popup
+				// need to hide the table view
+				self.tableViewContainerOutlet.hidden = TRUE;
 				[self buildTermsOfUsePopop];
 			}
 		}
