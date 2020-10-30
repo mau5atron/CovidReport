@@ -69,8 +69,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="US View" id="TYF-pd-lpb">
-                        <barButtonItem key="rightBarButtonItem" title="Cell Stuff" id="ogT-3Y-4hh">
+                        <barButtonItem key="rightBarButtonItem" title="Get US Data" id="ogT-3Y-4hh">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="getUSDataReq:" destination="BYZ-38-t0r" id="Glh-S8-m18"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

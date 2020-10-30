@@ -110,6 +110,10 @@
 	[task resume];
 }
 
+- (IBAction)getUSDataReq:(id)sender {
+	[self getLatestUSCovidData];
+}
+
 - (IBAction)teardownTermsPopup {
 	deviceWidth = CGRectGetWidth(self.view.bounds);
 	deviceHeight = CGRectGetHeight(self.view.bounds);
@@ -350,8 +354,65 @@
 }
 
 - (void)getLatestUSCovidData {
-	// make request///
+	// make request
+	NSLog(@"Requesting state data......");
+	NSString *baseUri = @"http://192.168.0.74:8090";
+	NSString *endpoint = @"/us_data";
 	
+	// set request url
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseUri, endpoint]]];
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, TRUE);
+	NSString *documentsPath = [paths objectAtIndex:0]; // first doc path
+	NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"token.plist"];
+	NSError *plistError;
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	// if the plist does not exist, copy it from mainBundle
+	if ( ![fileManager fileExistsAtPath:plistPath] ){
+		NSString *mainBundle = [[NSBundle mainBundle] pathForResource:@"token" ofType:@"plist"];
+		[fileManager copyItemAtPath:mainBundle toPath:plistPath error:&plistError];
+	}
+	
+	NSMutableDictionary *plistContents = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+	NSString *savedToken = [plistContents objectForKey:@"api_token"];
+	NSLog(@"PList path: %@", plistPath);
+	NSLog(@"Saved token: %@", savedToken);
+	
+	NSDictionary *jsonBody = @{ @"token": savedToken };
+	NSError *jsonError;
+	
+	NSData *jsonBodySerialized = [NSJSONSerialization dataWithJSONObject:jsonBody options:kNilOptions error:&jsonError];
+	
+	// setting headers
+	[request setHTTPMethod:@"POST"];
+	request.timeoutInterval = 5.0f;
+	[request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+	[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+	[request setHTTPBody:jsonBodySerialized];
+	
+	NSURLSessionConfiguration *urlSessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+	NSURLSession *session = [NSURLSession sessionWithConfiguration:urlSessionConfig delegate:NULL delegateQueue:[NSOperationQueue mainQueue]];
+	
+	NSURLSessionDataTask *requestDataTask = [session dataTaskWithRequest:request completionHandler:
+																					 ^( NSData *data, NSURLResponse *urlResponse, NSError *urlError ){
+																						 @try {
+																							 NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&urlError];
+																							 NSNumber *responseBit = jsonResponse[@"token_valid"];
+																							 // based on response bit, we set dictionary or pull up modal to get new token
+																							 if ( [responseBit intValue] == 1 ){
+																								 
+																							 }
+																							 
+																							 
+																							 NSLog(@"Token Response from us_data: %@", responseBit);
+																							 
+																						 } @catch (NSException *exception) {
+																							 NSLog(@"Error performing request: %@", exception);
+																						 }
+																					 }
+																					];
+	[requestDataTask resume];
 }
 
 @end
