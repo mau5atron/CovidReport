@@ -30,17 +30,18 @@
 	
 	// self.tableViewContainerOutlet.layer.hidden = TRUE;
 	self.tableViewContainerOutlet.layer.zPosition = -1.0f;
-	
-	// this stateDataDict will get set by the request through the api
-	self.stateDataDict = @{
-												 @"CA": @{@"positive": @2, @"recovered": @3, @"deaths": @4, @"date": @"9/27/2020", @"state_abbrev": @"CA", @"state_name": @"California"},
-												 @"FL": @{@"positive": @400, @"recovered": @30, @"deaths": @340, @"date": @"9/27/2020", @"state_abbrev": @"FL", @"state_name": @"Florida"}
-											 };
-	// time to make api request
-	self.stateDataTableViewControllerPtr.stateDataDict = self.stateDataDict;
+	[self getLatestUSCovidData];
 }
 
 // Actions *****************************************
+
+//- (IBAction)setDataDict:(id)sender {
+//	self.stateDataTableViewControllerPtr.stateDataDict = @{
+//																												 @"CA": @{@"positive": @2, @"recovered": @3, @"deaths": @4, @"date": @"9/27/2020", @"state_abbrev": @"CA", @"state_name": @"California"},
+//																												 @"FL": @{@"positive": @400, @"recovered": @30, @"deaths": @340, @"date": @"9/27/2020", @"state_abbrev": @"FL", @"state_name": @"Florida"}
+//																												 };
+//	[self.stateDataTableViewControllerPtr.tableView reloadData];
+//}
 
 - (IBAction)getApiToken:(id)sender {
 	
@@ -400,23 +401,30 @@
 	NSURLSession *session = [NSURLSession sessionWithConfiguration:urlSessionConfig delegate:NULL delegateQueue:[NSOperationQueue mainQueue]];
 	
 	NSURLSessionDataTask *requestDataTask = [session dataTaskWithRequest:request completionHandler:
-																					 ^( NSData *data, NSURLResponse *urlResponse, NSError *urlError ){
-																						 @try {
-																							 NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&urlError];
-																							 NSNumber *responseBit = jsonResponse[@"token_valid"];
-																							 // based on response bit, we set dictionary or pull up modal to get new token
-																							 if ( [responseBit intValue] == 1 ){
-																								 
-																							 }
-																							 
-																							 
-																							 NSLog(@"Token Response from us_data: %@", responseBit);
-																							 
-																						 } @catch (NSException *exception) {
-																							 NSLog(@"Error performing request: %@", exception);
-																						 }
-																					 }
-																					];
+	 ^( NSData *data, NSURLResponse *urlResponse, NSError *urlError ){
+		 @try {
+			 NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&urlError];
+			 NSNumber *responseBit = jsonResponse[@"payload"][@"token_valid"];
+			 // based on response bit, we set dictionary or pull up modal to get new token
+			 NSLog(@"Token Response from us_data: %@", responseBit);
+			 //NSLog(@"State data response: %@", jsonResponse[@"payload"][@"state_data"]);
+			 
+			 self.stateDataDict = jsonResponse[@"payload"][@"state_data"];
+			 self.stateDataTableViewControllerPtr.stateDataDict = self.stateDataDict;
+			 
+			 // reload data in the table view
+			 [self.stateDataTableViewControllerPtr.tableView reloadData];
+			 // make sure to build the popup when the response if false
+			// if ( [responseBit intValue] == 1 ){
+			//
+			// }
+
+			 
+		 } @catch (NSException *exception) {
+			 NSLog(@"Error performing request: %@", exception);
+		 }
+	 }
+	];
 	[requestDataTask resume];
 }
 

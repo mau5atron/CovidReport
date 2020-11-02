@@ -26,6 +26,7 @@
 // Actions
 - (IBAction)getApiToken:(id)sender;
 - (IBAction)getUSDataReq:(id)sender;
+//- (IBAction)setDataDict:(id)sender;
 
 // action buttons for debugging
 //- (IBAction)readFromPlist:(id)sender;

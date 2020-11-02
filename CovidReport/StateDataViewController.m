@@ -9,8 +9,8 @@
 #import "StateDataViewController.h"
 
 @interface StateDataViewController ()
-
 @end
+
 
 @implementation StateDataViewController
 @synthesize stateDataDict;
@@ -22,6 +22,14 @@
 	[self setContainerProperties];
 	//self.pieChartContainer.stringPassed = @"Yo whats up from View Controller!";
 	[self setPieChartData];
+	self.stateMapView.layer.cornerRadius = 8.0f;
+	
+	
+	// figure out how to set a circle overlay
+	// CLLocationCoordinate2D center = { 39.0f, -74.0f };
+	// MKCircle *currentStateCircle = [MKCircle circleWithCenterCoordinate:center radius:150000];
+	//
+	// [self.stateMapView addOverlay:currentStateCircle];
 }
 
 - (void)setStateData {
@@ -61,5 +69,13 @@
 //    // Pass the selected object to the new view controller.
 //}
 
+
+//- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
+//	MKCircleView *circleView = [[MKCircleView alloc] initWithOverlay:overlay];
+//	[circleView setFillColor:[UIColor redColor]];
+//	[circleView setStrokeColor:[UIColor greenColor]];
+//	[circleView setAlpha:1.0f];
+//	return circleView;
+//}
 
 @end

@@ -24,20 +24,13 @@
 	double containerWidth = self.layer.bounds.size.width;
 	double containerHeight = self.layer.bounds.size.height;
 
-	//NSArray *sampleData = @[@30, @40, @30];
-	NSLog( @"Positive: %i, Recovered: %i, Deaths: %i", self.positiveCases, self.recoveredCases, self.deathCases );
 	NSArray *stateData = @[@(positiveCases), @(recoveredCases), @(deathCases)];
 	__block CGContextRef viewContextRef = UIGraphicsGetCurrentContext();
-	//CGColorRef yellow = [[UIColor yellowColor] CGColor];
-	//CGContextClearRect(viewContextRef, self.bounds);
-	
-	//CGContextSetFillColorWithColor(viewContextRef, yellow);
-	//CGContextFillRect(viewContextRef, CGRectMake(10.0f, 10.0f, 30.0f, 30.0f));
-	
 	__block CGPoint center = CGPointMake(containerWidth - 100, containerHeight / 2);
 	__block CGFloat radius = containerHeight / 2.3f;
 	__block CGFloat startAngle = 0.0f;
-
+	__block UIColor *currentColor;
+	
 	[stateData enumerateObjectsUsingBlock:^( NSNumber * _Nonnull obj, NSUInteger index, BOOL * _Nonnull stop ){
 		// create path
 		// 723 needs to be all of our values combined ie 123 + 144 + 456
@@ -47,24 +40,26 @@
 		[circlePath addLineToPoint:center];
 
 		// add path
-
 		CGContextAddPath(viewContextRef, circlePath.CGPath);
 
-		// set colors
-		// these are random colors
-		UIColor *currentColor = [UIColor colorWithRed:((float)arc4random_uniform(256) / 255.0 ) green:((float)arc4random_uniform(256) / 255.0) blue:((float)arc4random_uniform(256) / 255.0) alpha:1.0];
+		// random colors
+		//UIColor *currentColor = [UIColor colorWithRed:((float)arc4random_uniform(256) / 255.0 ) green:((float)arc4random_uniform(256) / 255.0) blue:((float)arc4random_uniform(256) / 255.0) alpha:1.0];
 		
-		// set colors so we can call them later
+		
+		// this sets the cell color legend
 		switch (index) {
 			case 0:
+				currentColor = [UIColor colorWithRed:(179.0f/255.0f) green:(66.0f/255.0f) blue:(245.0f/255.0f) alpha:1.0f];
 				self.positiveColorViewOutlet.backgroundColor = currentColor;
 				self.positiveColorViewOutlet.layer.cornerRadius = 10.0f;
 				break;
 			case 1:
+				currentColor = [UIColor colorWithRed:(60.0f/255.0f) green:(168.0f/255.0f) blue:(50.0f/255.0f) alpha:1.0f];
 				self.recoveredColorViewOutlet.backgroundColor = currentColor;
 				self.recoveredColorViewOutlet.layer.cornerRadius = 10.0f;
 				break;
 			case 2:
+				currentColor = [UIColor colorWithRed:(168.0f/255.0f) green:(50.0f/255.0f) blue:(50.0f/255.0f) alpha:1.0f];
 				self.deathsColorViewOutlet.backgroundColor = currentColor;
 				self.deathsColorViewOutlet.layer.cornerRadius = 10.0f;
 				break;

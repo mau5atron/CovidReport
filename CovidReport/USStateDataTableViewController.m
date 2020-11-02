@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //	fruits = @[@"Banana", @"Apple", @"Orange"];
+	NSLog(@"State data dict USStateDataTable didload: %@", self.stateDataDict);
 	self.tableView.rowHeight = 100;
 }
 
@@ -43,31 +44,49 @@
 	// Configure the cell...
 	//stateDataCell.tableCellDataLabel.text = stateDataArray[indexPath.row];
 	NSString *key = [self.stateDataDict allKeys][indexPath.row];
-	NSLog(@"Key val: %@", key);
+	//NSLog(@"Key val: %@", key);
 	stateDataCell.tableCellDataLabel.text = key;
 	stateDataCell.selectionStyle = UITableViewCellSelectionStyleNone;
-	UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, stateDataCell.bounds.size.height - 0.5, stateDataCell.bounds.size.width, 1)];
-	bottomLine.backgroundColor = [UIColor whiteColor];
-	[stateDataCell.contentView addSubview:bottomLine];
+	stateDataCell.innerCellContainerOutlet.layer.cornerRadius = 8.0f;
+	stateDataCell.innerCellContainerOutlet.layer.shadowRadius = 10;
+	stateDataCell.innerCellContainerOutlet.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor blackColor]);
+	stateDataCell.innerCellContainerOutlet.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+	
+	UIEdgeInsets shadowInsets = UIEdgeInsetsMake(0, 0, -10.5f, 0);
+	UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:UIEdgeInsetsInsetRect(stateDataCell.innerCellContainerOutlet.bounds, shadowInsets)];
+	
+	stateDataCell.innerCellContainerOutlet.layer.shadowPath = (__bridge CGPathRef _Nullable)(shadowPath);
+	
+	stateDataCell.innerCellContainerOutlet.layer.position = CGPointMake(-stateDataCell.layer.bounds.size.width, stateDataCell.layer.bounds.size.height / 2);
+	[UIView animateWithDuration:0.2f delay:0.1f options:(UIViewAnimationOptions)UIViewAnimationCurveEaseIn animations:^{
+		stateDataCell.innerCellContainerOutlet.layer.position = CGPointMake(stateDataCell.layer.bounds.size.width / 2, stateDataCell.layer.bounds.size.height / 2);
+	} completion:NULL];
+	
+	
+	// this is to set border bottom
+	//	UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, stateDataCell.bounds.size.height - 0.5, stateDataCell.bounds.size.width, 1)];
+	//	bottomLine.backgroundColor = [UIColor whiteColor];
+	//	[stateDataCell.contentView addSubview:bottomLine];
+	
 	//[stateDataCell.layer setBorderColor:[UIColor redColor].CGColor];
 	//[stateDataCell.layer setBorderWidth:1.0f];
 	
 	
 	// try rendering this from viewdidload
 	// creating bar within skeleton view
-//	CALayer *barLayer = [CALayer layer];
-//	barLayer.frame = CGRectMake(0, 0, 20.0f, stateDataCell.tableCellViewOutlet.bounds.size.height);
-//	barLayer.backgroundColor = [UIColor blueColor].CGColor;
-//	[stateDataCell.tableCellViewOutlet.layer addSublayer:barLayer];
-//
-//
-//	// put this inside an animation block
-//	[UIView animateWithDuration:5.0f delay:3.0f options:(UIViewAnimationOptions)UIViewAnimationCurveEaseIn animations:^{
-////		barLayer.position = CGPointMake(stateDataCell.tableCellViewOutlet.bounds.size.width, stateDataCell.tableCellViewOutlet.bounds.size.height / 2);
-//		barLayer.frame = CGRectMake(stateDataCell.tableCellViewOutlet.bounds.size.width, 0, 20.0f, stateDataCell.tableCellViewOutlet.bounds.size.height);
-//	} completion:^(BOOL finished){
-//		NSLog(@"Finished cell moving animation...");
-//	}];
+	//	CALayer *barLayer = [CALayer layer];
+	//	barLayer.frame = CGRectMake(0, 0, 20.0f, stateDataCell.tableCellViewOutlet.bounds.size.height);
+	//	barLayer.backgroundColor = [UIColor blueColor].CGColor;
+	//	[stateDataCell.tableCellViewOutlet.layer addSublayer:barLayer];
+	//
+	//
+	// put this inside an animation block
+	//	[UIView animateWithDuration:5.0f delay:3.0f options:(UIViewAnimationOptions)UIViewAnimationCurveEaseIn animations:^{
+	//		barLayer.position = CGPointMake(stateDataCell.tableCellViewOutlet.bounds.size.width, stateDataCell.tableCellViewOutlet.bounds.size.height / 2);
+	//		barLayer.frame = CGRectMake(stateDataCell.tableCellViewOutlet.bounds.size.width, 0, 20.0f, stateDataCell.tableCellViewOutlet.bounds.size.height);
+	//	} completion:^(BOOL finished){
+	//		NSLog(@"Finished cell moving animation...");
+	//	}];
 	
 	
 	return stateDataCell;
@@ -123,7 +142,7 @@
 		//stateDataView.stateDataTitle = stateDataArray[idxPath.row];
 		NSString *key = [self.stateDataDict allKeys][idxPath.row];
 		// this returns the object data {} for specific key state
-		NSLog(@"Data from key: %@", [self.stateDataDict objectForKey:key]);
+		//NSLog(@"Data from key: %@", [self.stateDataDict objectForKey:key]);
 		//stateDataView.stateDataTitle = [self.stateDataDict allKeys][idxPath.row];
 		// only send the object literal for the key, i.e. CA, FL
 		stateDataView.stateDataDict = [(NSMutableDictionary *)self.stateDataDict objectForKey:key];

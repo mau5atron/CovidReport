@@ -10,6 +10,7 @@
 
 @implementation TableViewCell
 
+// animate the entry for each cell
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

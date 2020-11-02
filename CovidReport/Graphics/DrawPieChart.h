@@ -17,9 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int positiveCases;
 @property (nonatomic) int recoveredCases;
 @property (nonatomic) int deathCases;
-@property (nonatomic) UIColor *positiveColor;
-@property (nonatomic) UIColor *recoveredColor;
-@property (nonatomic) UIColor *deathsColor;
 
 @property (weak, nonatomic) IBOutlet UIView *positiveColorViewOutlet;
 @property (weak, nonatomic) IBOutlet UIView *recoveredColorViewOutlet;
