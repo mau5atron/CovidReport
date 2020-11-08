@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4EAAFBC5254CE8F4009EC95F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAAFBC4254CE8F4009EC95F /* MapKit.framework */; };
-		4EAAFBC8254CEC47009EC95F /* StateMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAFBC7254CEC47009EC95F /* StateMapView.m */; };
 		4EB1A74225074EA100AA25FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74125074EA100AA25FB /* AppDelegate.m */; };
 		4EB1A74525074EA100AA25FB /* WorldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1A74425074EA100AA25FB /* WorldViewController.m */; };
 		4EB1A74825074EA100AA25FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1A74625074EA100AA25FB /* Main.storyboard */; };
@@ -26,8 +25,6 @@
 /* Begin PBXFileReference section */
 		23EF458BE1D55B073E31F220 /* Pods-CovidReport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidReport.debug.xcconfig"; path = "Target Support Files/Pods-CovidReport/Pods-CovidReport.debug.xcconfig"; sourceTree = "<group>"; };
 		4EAAFBC4254CE8F4009EC95F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		4EAAFBC6254CEC47009EC95F /* StateMapView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StateMapView.h; sourceTree = "<group>"; };
-		4EAAFBC7254CEC47009EC95F /* StateMapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StateMapView.m; sourceTree = "<group>"; };
 		4EB1A73D25074EA100AA25FB /* CovidReport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidReport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB1A74025074EA100AA25FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4EB1A74125074EA100AA25FB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -96,8 +93,6 @@
 				4EB30615253FFFDF008D00D0 /* TableViewCell.m */,
 				4EB3061725436DD3008D00D0 /* StateDataViewController.h */,
 				4EB3061825436DD3008D00D0 /* StateDataViewController.m */,
-				4EAAFBC6254CEC47009EC95F /* StateMapView.h */,
-				4EAAFBC7254CEC47009EC95F /* StateMapView.m */,
 				4EB1A74625074EA100AA25FB /* Main.storyboard */,
 				4EB1A74B25074EA100AA25FB /* LaunchScreen.storyboard */,
 				4EB1A74925074EA100AA25FB /* Assets.xcassets */,
@@ -235,7 +230,6 @@
 				4EB1A74525074EA100AA25FB /* WorldViewController.m in Sources */,
 				4EB1A75025074EA100AA25FB /* main.m in Sources */,
 				4EB3061925436DD3008D00D0 /* StateDataViewController.m in Sources */,
-				4EAAFBC8254CEC47009EC95F /* StateMapView.m in Sources */,
 				4EB30613253FFFBB008D00D0 /* USStateDataTableViewController.m in Sources */,
 				4EEECF7D25460650004E2FBB /* DrawPieChart.m in Sources */,
 				4EB30616253FFFDF008D00D0 /* TableViewCell.m in Sources */,

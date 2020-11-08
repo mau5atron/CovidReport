@@ -22,14 +22,32 @@
 	[self setContainerProperties];
 	//self.pieChartContainer.stringPassed = @"Yo whats up from View Controller!";
 	[self setPieChartData];
-	self.stateMapView.layer.cornerRadius = 8.0f;
+
 	
-	
-	// figure out how to set a circle overlay
+	// figure out circle overlay
 	// CLLocationCoordinate2D center = { 39.0f, -74.0f };
 	// MKCircle *currentStateCircle = [MKCircle circleWithCenterCoordinate:center radius:150000];
 	//
 	// [self.stateMapView addOverlay:currentStateCircle];
+	
+	self.overlayedMapViewOutlet.layer.masksToBounds = TRUE;
+	self.overlayedMapViewOutlet.layer.cornerRadius = 8.0f;
+	
+	CLLocationDistance radius = 150000.0f;
+	MKCoordinateSpan span;
+	MKCoordinateRegion region;
+	CLLocationCoordinate2D centerLocation = CLLocationCoordinate2DMake(44.068203, -114.742043);
+	
+	span.latitudeDelta = 5;
+	span.longitudeDelta = 5;
+	
+	region.span = span;
+	region.center = centerLocation;
+	
+	MKCircle *circle = [MKCircle circleWithCenterCoordinate:centerLocation radius:radius];
+	// in order for the overlay to appear, we have to drag the map view to the controller button on top of the screen and add view controller as delegate
+	[self.overlayedMapViewOutlet setRegion:region animated:TRUE];
+	[self.overlayedMapViewOutlet addOverlay:circle];
 }
 
 - (void)setStateData {
@@ -77,5 +95,13 @@
 //	[circleView setAlpha:1.0f];
 //	return circleView;
 //}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+	MKCircle *circle = overlay;
+	MKCircleRenderer *circleView = [[MKCircleRenderer alloc] initWithCircle:circle];
+	circleView.fillColor = [[UIColor redColor] colorWithAlphaComponent:0.7f];
+	circleView.lineWidth = 3;
+	return circleView;
+}
 
 @end

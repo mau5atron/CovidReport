@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "Graphics/DrawPieChart.h"
 #import <MapKit/MapKit.h>
-
+#import "Graphics/DrawPieChart.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface StateDataViewController : UIViewController <MKMapViewDelegate>
@@ -24,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *positive;
 @property (weak, nonatomic) IBOutlet UILabel *recovered;
 @property (weak, nonatomic) IBOutlet UILabel *deaths;
-@property (weak, nonatomic) IBOutlet MKMapView *stateMapView;
+@property (weak, nonatomic) IBOutlet MKMapView *overlayedMapViewOutlet;
 
 - (void)setStateData;
 - (void)setContainerProperties;

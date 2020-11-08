@@ -144,7 +144,7 @@
         <scene sceneID="c7F-EY-eQ8">
             <objects>
                 <viewController id="jvh-eo-JM0" customClass="StateDataViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u1q-h2-Rcy">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="u1q-h2-Rcy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -316,34 +316,40 @@
                                     <outlet property="recoveredColorViewOutlet" destination="zBo-8z-ASA" id="IAI-H2-xTx"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xOy-2S-iQK" customClass="StateMapView">
-                                <rect key="frame" x="20" y="360" width="374" height="428"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OKs-Ie-6BB">
+                                <rect key="frame" x="20" y="348" width="374" height="347"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="347" id="PF6-Af-QGA"/>
+                                    <constraint firstAttribute="width" constant="374" id="ki9-13-jFc"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="jvh-eo-JM0" id="QTd-Bm-Q6F"/>
+                                </connections>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="xOy-2S-iQK" secondAttribute="bottom" constant="20" id="1B2-p9-yOh"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="OKs-Ie-6BB" secondAttribute="bottom" constant="20" id="2I7-7h-L9W"/>
                             <constraint firstItem="0iv-tK-un1" firstAttribute="trailing" secondItem="KwT-aX-ghO" secondAttribute="trailing" constant="20" id="7CB-2z-JDN"/>
                             <constraint firstItem="ZJs-pP-u3F" firstAttribute="top" secondItem="KwT-aX-ghO" secondAttribute="bottom" constant="20" id="9Iw-6l-Q4F"/>
+                            <constraint firstItem="OKs-Ie-6BB" firstAttribute="leading" secondItem="0iv-tK-un1" secondAttribute="leading" constant="20" id="E46-A1-HxO"/>
                             <constraint firstItem="KwT-aX-ghO" firstAttribute="top" secondItem="0iv-tK-un1" secondAttribute="top" constant="20" id="FLB-gu-2ao"/>
-                            <constraint firstItem="xOy-2S-iQK" firstAttribute="leading" secondItem="0iv-tK-un1" secondAttribute="leading" constant="20" id="Kk4-cR-hCg"/>
                             <constraint firstItem="ZJs-pP-u3F" firstAttribute="leading" secondItem="0iv-tK-un1" secondAttribute="leading" constant="20" id="LKo-oB-KuP"/>
+                            <constraint firstItem="OKs-Ie-6BB" firstAttribute="top" secondItem="ZJs-pP-u3F" secondAttribute="bottom" constant="20" id="PQr-hY-crf"/>
                             <constraint firstItem="0iv-tK-un1" firstAttribute="trailing" secondItem="ZJs-pP-u3F" secondAttribute="trailing" constant="20" id="T0e-ca-BFN"/>
-                            <constraint firstItem="xOy-2S-iQK" firstAttribute="top" secondItem="ZJs-pP-u3F" secondAttribute="bottom" constant="20" id="iMd-LG-4dW"/>
+                            <constraint firstItem="0iv-tK-un1" firstAttribute="trailing" secondItem="OKs-Ie-6BB" secondAttribute="trailing" constant="20" id="e2H-dl-gPB"/>
                             <constraint firstItem="KwT-aX-ghO" firstAttribute="leading" secondItem="0iv-tK-un1" secondAttribute="leading" constant="20" id="lui-h3-EUx"/>
-                            <constraint firstItem="0iv-tK-un1" firstAttribute="trailing" secondItem="xOy-2S-iQK" secondAttribute="trailing" constant="20" id="p7O-tW-wDJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0iv-tK-un1"/>
                     </view>
                     <connections>
                         <outlet property="dateUpdated" destination="x5c-Nm-siH" id="vbl-dh-eC4"/>
                         <outlet property="deaths" destination="o1A-IT-Zpj" id="Tam-kj-YiI"/>
+                        <outlet property="overlayedMapViewOutlet" destination="OKs-Ie-6BB" id="3sK-2I-LgD"/>
                         <outlet property="pieChartContainer" destination="ZJs-pP-u3F" id="Jp6-5U-ok1"/>
                         <outlet property="positive" destination="NUO-fJ-Mp5" id="8rF-Lb-6He"/>
                         <outlet property="recovered" destination="vgn-tl-gYu" id="n5B-n0-4VG"/>
                         <outlet property="stateDataContainer" destination="KwT-aX-ghO" id="EVt-YH-Pr4"/>
-                        <outlet property="stateMapView" destination="xOy-2S-iQK" id="gSy-vs-CUn"/>
                         <outlet property="stateName" destination="0aL-gv-DGN" id="dpb-ff-3XF"/>
                     </connections>
                 </viewController>
