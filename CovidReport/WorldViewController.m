@@ -19,8 +19,28 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	// setup api plist reading baseUri
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, TRUE);
 	
-	// [self buildTermsOfUsePopop];
+	NSLog(@"Searchpaths: %@", paths);
+	NSString *documentsPath = [paths objectAtIndex:0];
+	NSString *apiPlistPath = [documentsPath stringByAppendingPathComponent:@"api.plist"];
+	NSLog(@"plist path in docs: %@", apiPlistPath);
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSError *apiPlistError;
+	if ( ![fileManager fileExistsAtPath:apiPlistPath] ){
+		NSString *mBundle = [[NSBundle mainBundle] pathForResource:@"api" ofType:@"plist"];
+		[fileManager copyItemAtPath:mBundle toPath:apiPlistPath error:&apiPlistError];
+	}
+	
+	NSMutableDictionary *plistContents = [[NSMutableDictionary alloc] initWithContentsOfFile:apiPlistPath];
+	NSString *baseUri = [plistContents objectForKey:@"API_BASE_URI"];
+	
+	NSLog(@"BaseURI from api.plist: %@", baseUri);
+	NSLog(@"plistContents: %@", plistContents);
+	
+	
+	
 	// on load we need to make the token checks
 	deviceWidth = CGRectGetWidth(self.view.bounds);
 	deviceHeight = CGRectGetHeight(self.view.bounds);
@@ -31,23 +51,17 @@
 	// self.tableViewContainerOutlet.layer.hidden = TRUE;
 	self.tableViewContainerOutlet.layer.zPosition = -1.0f;
 	[self getLatestUSCovidData];
+	NSString *infoStr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"API_BASE_URI"];
+//	NSLog(@"BaseUri from info.plist: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"API_BASE_URI"] );
+	NSString *newStr = [infoStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+	NSLog(@"BaseUri regex string from info.plist: %@", newStr);
 }
-
-// Actions *****************************************
-
-//- (IBAction)setDataDict:(id)sender {
-//	self.stateDataTableViewControllerPtr.stateDataDict = @{
-//																												 @"CA": @{@"positive": @2, @"recovered": @3, @"deaths": @4, @"date": @"9/27/2020", @"state_abbrev": @"CA", @"state_name": @"California"},
-//																												 @"FL": @{@"positive": @400, @"recovered": @30, @"deaths": @340, @"date": @"9/27/2020", @"state_abbrev": @"FL", @"state_name": @"Florida"}
-//																												 };
-//	[self.stateDataTableViewControllerPtr.tableView reloadData];
-//}
 
 - (IBAction)getApiToken:(id)sender {
 	
 	// prepare endpoint request
-	//NSString *baseUri = @"http://localhost:8090";
-	NSString *baseUri = @"http://192.168.0.74:8090";
+	//NSString *baseUriFromBundle = [[[NSBundle mainBundle] di]];
+	NSString *baseUri = [[[NSProcessInfo processInfo] environment] objectForKey:@"baseUri"];
 	NSString *endPoint = @"/agree_to_terms";
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseUri, endPoint]]];
 	// NSDictionary *jsonBody = @{ @"accepted_tos": @"trueaaa" };
@@ -164,8 +178,7 @@
 
 - (void)requestTos {
 	// request setup
-	// NSString *baseUri = @"http://localhost:8090";
-	NSString *baseUri = @"http://192.168.0.74:8090";
+	NSString *baseUri = [[[NSProcessInfo processInfo] environment] objectForKey:@"baseUri"];
 	NSString *endpoint = @"/terms_of_service";
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseUri, endpoint]]];
 	
@@ -200,8 +213,7 @@
 
 - (void)checkForValidTokenFunc {
 	NSLog(@"Starting check for token.....");
-	//NSString *baseUri = @"http://localhost:8090";
-	NSString *baseUri = @"http://192.168.0.74:8090";
+	NSString *baseUri = [[[NSProcessInfo processInfo] environment] objectForKey:@"baseUri"];
 	
 	NSString *endPoint = @"/validate_token";
 	
@@ -362,7 +374,8 @@
 - (void)getLatestUSCovidData {
 	// make request
 	NSLog(@"Requesting state data......");
-	NSString *baseUri = @"http://192.168.0.74:8090";
+	//NSString *baseUri = [[[NSProcessInfo processInfo] environment] objectForKey:@"baseUri"];
+	NSString *baseUri = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"API_BASE_URI"];
 	NSString *endpoint = @"/us_data";
 	
 	// set request url

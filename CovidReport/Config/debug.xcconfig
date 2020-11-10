@@ -1,3 +1,14 @@
+//
+//  debug.xcconfig
+//  CovidReport
+//
+//  Created by Gabriel Betancourt on 11/8/20.
+//  Copyright © 2020 mau5atron. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 PODS_BUILD_DIR = ${BUILD_DIR}
@@ -6,3 +17,5 @@ PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
 PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
+
+API_BASE_URI=http:\/\/192.168.0.74:8090
