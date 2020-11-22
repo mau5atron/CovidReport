@@ -49,6 +49,7 @@
 		4EE69EAA250A0561006D8ABC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4EEECF7B25460650004E2FBB /* DrawPieChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawPieChart.h; sourceTree = "<group>"; };
 		4EEECF7C25460650004E2FBB /* DrawPieChart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawPieChart.m; sourceTree = "<group>"; };
+		4EFB2880255B6EE4008CE08E /* base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +71,7 @@
 				4E1BA7B02558E60000E1B601 /* debug.xcconfig */,
 				4E1BA7B12558E63400E1B601 /* staging.xcconfig */,
 				4E1BA7B32558E65200E1B601 /* release.xcconfig */,
+				4EFB2880255B6EE4008CE08E /* base.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -273,7 +275,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4E1BA7AD2558E11800E1B601 /* Release Staging */ = {
+		4E1BA7AD2558E11800E1B601 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -321,15 +323,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PODS_CONFIGURATION_BUILD_DIR = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Staging";
+			name = Staging;
 		};
-		4E1BA7AE2558E11800E1B601 /* Release Staging */ = {
+		4E1BA7AE2558E11800E1B601 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E1BA7B12558E63400E1B601 /* staging.xcconfig */;
 			buildSettings = {
+				API_BASE_URI = "$(API_BASE_URI)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJ3X3ADRG5;
@@ -342,7 +346,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = "Release Staging";
+			name = Staging;
 		};
 		4EB1A75125074EA100AA25FB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -460,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E1BA7B02558E60000E1B601 /* debug.xcconfig */;
 			buildSettings = {
+				API_BASE_URI = "$(API_BASE_URI)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJ3X3ADRG5;
@@ -500,20 +505,20 @@
 			buildConfigurations = (
 				4EB1A75125074EA100AA25FB /* Debug */,
 				4EB1A75225074EA100AA25FB /* Release */,
-				4E1BA7AD2558E11800E1B601 /* Release Staging */,
+				4E1BA7AD2558E11800E1B601 /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Staging";
+			defaultConfigurationName = Staging;
 		};
 		4EB1A75325074EA100AA25FB /* Build configuration list for PBXNativeTarget "CovidReport" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EB1A75425074EA100AA25FB /* Debug */,
 				4EB1A75525074EA100AA25FB /* Release */,
-				4E1BA7AE2558E11800E1B601 /* Release Staging */,
+				4E1BA7AE2558E11800E1B601 /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Staging";
+			defaultConfigurationName = Staging;
 		};
 /* End XCConfigurationList section */
 	};
